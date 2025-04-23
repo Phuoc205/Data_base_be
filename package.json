@@ -1,0 +1,28 @@
+{
+  "name": "web_shop_be",
+  "version": "1.0.0",
+  "description": "code back end cho btl database",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phuoc205/Data_base_be.git"
+  },
+  "author": "Nguyen Tan Phuoc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phuoc205/Data_base_be/issues"
+  },
+  "homepage": "https://github.com/Phuoc205/Data_base_be#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
