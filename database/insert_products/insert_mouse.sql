@@ -2,6 +2,9 @@
 -- **************************INSERT MOUSE************************ --
 -- ************************************************************** --
 
+ALTER TABLE CATEGORY_MOUSE
+DROP CONSTRAINT FK_MOUSE_PRODUCT;
+
 INSERT INTO CATEGORY_MOUSE 
 (
     PRODUCT_ID, SWITCH, IPS, LED, LIFESPAN, RESPOND_RATE,
@@ -29,3 +32,6 @@ VALUES
 ('MOUSE009', 'Kailh GM8.0', 600, 'RGB', 80000000, 1, 'Ergonomic', 100, '135 x 70 x 43 mm', 92, 'Silver', 'Bluetooth', 15, 'Optical', 9),
 
 ('MOUSE010', 'Huano Blue', 350, 'Green', 30000000, 1, 'Fingertip Grip', 50, '117 x 60 x 38 mm', 76, 'White-Gray', 'Wired (USB)', 0, 'Laser', 5);
+
+ALTER TABLE CATEGORY_MOUSE
+ADD CONSTRAINT FK_MOUSE_PRODUCT FOREIGN KEY (PRODUCT_ID);

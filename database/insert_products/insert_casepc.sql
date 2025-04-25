@@ -2,7 +2,7 @@
 -- **************************INSERT CASE PC********************** --
 -- ************************************************************** --
 
-INSERT INTO CATEGORY_CASEPC 
+INSERT INTO CATEGORY_CASEPC
 (
   PRODUCT_ID, CASE_TYPE, NUM_PORTS, FANS,
   CONNECTION_PORTS, MATERIAL, COLOR, DIMENSION, MBOARD_SIZE
