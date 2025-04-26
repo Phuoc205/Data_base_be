@@ -61,16 +61,16 @@ app.get('/cart', async (req, res) => {
     `;
 
     const cartResult = await sql.query`
-      SELECT 
-      P.MANUFACTURE, 
-      P.IMAGE_LINK, 
-      P.PRODUCT_NAME, 
-      P.PRICE, 
-      C.PRODUCT_ID, 
-      C.AMOUNT
-    FROM CART C
-    JOIN PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
-    WHERE C.CUSTOMER_ID = ${customerID}
+      SELECT DISTINCT 
+        P.MANUFACTURE, 
+        P.IMAGE_LINK, 
+        P.PRODUCT_NAME, 
+        P.PRICE, 
+        C.PRODUCT_ID,
+        C.AMOUNT
+      FROM CART C
+      JOIN PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
+      WHERE C.CUSTOMER_ID = ${customerID}
     `;
     console.log(cartResult);
 
@@ -196,18 +196,101 @@ app.get('/productsBestSeller', async (req, res) => {
       });
   }
 });
-
-app.get('/productCategory', async (req, res) => {
-  const { category } = req.query;
-
+app.get('/products/laptop', async (req, res) => {
   try {
       await sql.connect(config);
-      const result = await sql.query`
-          SELECT * FROM PRODUCTS WHERE CATEGORY = ${category}
-      `;
-      res.json(result.recordset);
-  } catch (err) {
-      console.error('Lỗi truy vấn sản phẩm:', err);
-      res.status(500).json({ error: 'Lỗi máy chủ' });
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 0');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/mouse', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 1');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/keyboard', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 2');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/monitor', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 3');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/headphone', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 4');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/casepc', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 5');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/cooler', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 6');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/console', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 7');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
+  }
+});
+
+app.get('/products/table', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const products = await sql.query('SELECT * FROM Product WHERE CATEGORY_ID = 8');
+      res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Failed to fetch products' });
   }
 });

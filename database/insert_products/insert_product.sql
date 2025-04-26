@@ -14,7 +14,7 @@ VALUES
     'L002', 14, 'ASUS Vivobook 14 X1404ZA-NJ582W', 'ASUS', '8990000', 0, './img/products/Laptop/L002.jpg'
 ),
 (
-    'L003', 3, 'HP Spectre x360 14', 'HP', '44990000', 0, './img/products/LaptopL003.png'
+    'L003', 3, 'HP Spectre x360 14', 'HP', '44990000', 0, './img/products/Laptop/L003.png'
 ),
 (
     'L004', 8, 'Asus ROG Zephyrus G16 GU603VU-N3898W', 'ASUS', '38990000', 0, './img/products/Laptop/L004.jpg'
