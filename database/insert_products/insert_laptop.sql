@@ -18,7 +18,7 @@ VALUES
 (
   'L002', 'Intel Core i3-1215U', 6, 8, 1200, 4400, 8, 'DDR4', 3200, 16, 512,
   15, '1920x1080', 60, 'IPS', 'Intel UHD Graphics', 'SonicMaster audio', 'USB Type-C, 1 x USB 2.0, 2 x USB 3.2, HDMI1x 3.5mm Audio', 'Wi-Fi 6E, Bluetooth 5.3', 'HD Webcam',
-  '180° hinge, fingerprint, webcam cover', 'No', '359.7 x 232.5 x 17.9 mm', 'Plastic', 42, 'Windows 11', '2023-06-07'
+  '180° hinge, fingerprint, webcam cover', 'No', '359.7 x 232.5 x 17.9 mm', 1400, 'Plastic', 42, 'Windows 11', '2023-06-07'
 ),
 
 (
