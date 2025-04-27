@@ -200,7 +200,7 @@ app.get('/products/laptop', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_LAPTOP C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 0`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
