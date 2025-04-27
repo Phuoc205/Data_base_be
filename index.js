@@ -200,7 +200,7 @@ app.get('/products/laptop', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_LAPTOP C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 0`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -214,7 +214,7 @@ app.get('/products/mouse', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_MOUSE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 1`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -228,7 +228,7 @@ app.get('/products/keyboard', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_KEYBOARD C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 2`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -242,7 +242,7 @@ app.get('/products/monitor', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_MONITOR C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 3`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -256,7 +256,7 @@ app.get('/products/headphones', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_HEADPHONES C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 4`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -284,7 +284,7 @@ app.get('/products/cooler', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_COOLER C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 6`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -298,7 +298,7 @@ app.get('/products/console', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_CONSOLE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 7`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
@@ -312,7 +312,7 @@ app.get('/products/table', async (req, res) => {
       await sql.connect(config);
       const products = await sql.query(`SELECT P.*, C.*
         FROM PRODUCT P
-        JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
+        JOIN CATEGORY_TABLE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 8`);
       res.json(products.recordset);  // Trả về dữ liệu sản phẩm dưới dạng JSON
   } catch (error) {
