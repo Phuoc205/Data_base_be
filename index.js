@@ -20,32 +20,6 @@ const config = {
   }
 };
 
-const custom_item = [
-  {
-    manufacture: "GearVN",
-    img_link: "/img/products/laptop/laptop.webp",
-    info: "Asus Vivobook Go 15 E1504FA R5 7520U (NJ776W)",
-    price: 15000000,
-    amount: 1,
-  },
-  {
-    manufacture: "COAMc  oaC",
-    img_link: "/img/products/laptop/laptop.webp",
-    info: "NGUYEN TAN PHUOC",
-    price: 2000000000,
-    amount: 1,
-  },
-  {
-    manufacture: "XYZ_ABC",
-    img_link: "/img/products/laptop/laptop.webp",
-    info: "CAI NIT",
-    price: 150000,
-    amount: 1,
-  }
-];
-
-
-
 app.get('/cart', async (req, res) => {
   const customerID = req.query.customer_id;
 
@@ -320,39 +294,7 @@ app.get('/products/table', async (req, res) => {
       res.status(500).json({ message: 'Failed to fetch products' });
   }
 });
-// app.get('/products/:category', async (req, res) => {
-//   const { category } = req.params;
-//   const categoryMap = {
-//     laptop: { id: 0, table: 'CATEGORY_LAPTOP' },    // cần đúng bảng
-//     mouse: { id: 1, table: 'CATEGORY_MOUSE' },
-//     keyboard: { id: 2, table: 'CATEGORY_KEYBOARD' },
-//     monitor: { id: 3, table: 'CATEGORY_MONITOR' },
-//     headphones: { id: 4, table: 'CATEGORY_HEADPHONES' },
-//     casepc: { id: 5, table: 'CATEGORY_CASEPC' },
-//     cooler: { id: 6, table: 'CATEGORY_COOLER' },
-//     console: { id: 7, table: 'CATEGORY_CONSOLE' },
-//     table: { id: 8, table: 'CATEGORY_TABLE' },
-//   };
 
-//   if (!categoryMap[category]) {
-//     return res.status(400).json({ message: 'Invalid category' });
-//   }
-
-//   const { id, table } = categoryMap[category];
-
-//   try {
-//     const result = await sql.query(`
-//       SELECT P.*, C.*
-//       FROM PRODUCT P
-//       JOIN ${table} C ON P.PRODUCT_ID = C.PRODUCT_ID
-//       WHERE P.CATEGORY_ID = ${id}
-//     `);
-//     res.json(result.recordset);
-//   } catch (error) {
-//     console.error('Error fetching products:', error);
-//     res.status(500).json({ message: 'Failed to fetch products' });
-//   }
-// });
 app.post('/cart/update-amount', async (req, res) => {
   const { customer_id, product_id, amount } = req.body;
   try {
@@ -439,5 +381,26 @@ app.post('/cart/checkout', async (req, res) => {
   } catch (err) {
       console.error('Lỗi database:', err.message);
       res.status(500).json({ success: false, message: 'Lỗi server' });
+  }
+});
+
+app.get('/products-list', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const result = await sql.query(`
+      SELECT PRODUCT_ID, PRODUCT_NAME, CATEGORY_ID, PRICE, IN_STOCK
+      FROM PRODUCT
+    `);
+
+    res.json({
+      success: true,
+      products: result.recordset,
+    });
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch products'
+    });
   }
 });
