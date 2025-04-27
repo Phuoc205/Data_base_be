@@ -404,3 +404,25 @@ app.get('/products-list', async (req, res) => {
     });
   }
 });
+
+app.post('/import-product', async (req, res) => {
+  const { productId, quantity } = req.body;
+  try {
+    await sql.connect(config);
+
+    const request = new sql.Request();
+    request.input('productId', sql.VarChar, productId);
+    request.input('quantity', sql.Int, quantity);
+
+    await request.query(`
+      UPDATE PRODUCT
+      SET IN_STOCK = IN_STOCK + @quantity
+      WHERE PRODUCT_ID = @productId
+    `);
+
+    res.json({ success: true, message: 'Nhập hàng thành công' });
+  } catch (error) {
+    console.error('Error updating stock:', error);
+    res.status(500).json({ success: false, message: 'Nhập hàng thất bại' });
+  }
+});
