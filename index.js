@@ -169,10 +169,11 @@ app.get('/productsBestSeller', async (req, res) => {
       });
   }
 });
+
 app.get('/products/laptop', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_LAPTOP C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 0`);
@@ -186,7 +187,7 @@ app.get('/products/laptop', async (req, res) => {
 app.get('/products/mouse', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_MOUSE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 1`);
@@ -200,7 +201,7 @@ app.get('/products/mouse', async (req, res) => {
 app.get('/products/keyboard', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_KEYBOARD C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 2`);
@@ -214,7 +215,7 @@ app.get('/products/keyboard', async (req, res) => {
 app.get('/products/monitor', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_MONITOR C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 3`);
@@ -228,7 +229,7 @@ app.get('/products/monitor', async (req, res) => {
 app.get('/products/headphones', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_HEADPHONES C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 4`);
@@ -242,7 +243,7 @@ app.get('/products/headphones', async (req, res) => {
 app.get('/products/casepc', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_CASEPC C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 5`);
@@ -256,7 +257,7 @@ app.get('/products/casepc', async (req, res) => {
 app.get('/products/cooler', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_COOLER C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 6`);
@@ -270,7 +271,7 @@ app.get('/products/cooler', async (req, res) => {
 app.get('/products/console', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_CONSOLE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 7`);
@@ -284,7 +285,7 @@ app.get('/products/console', async (req, res) => {
 app.get('/products/table', async (req, res) => {
   try {
       await sql.connect(config);
-      const products = await sql.query(`SELECT P.*, C.*
+      const products = await sql.query(`SELECT C.*, P.IN_STOCK, P.PRODUCT_NAME, P.PRICE, P.IMAGE_LINK, P.CATEGORY_ID, P.MANUFACTURE, P.SOLD
         FROM PRODUCT P
         JOIN CATEGORY_TABLE C ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE P.CATEGORY_ID = 8`);
