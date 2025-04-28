@@ -406,31 +406,8 @@ app.get('/products-list', async (req, res) => {
   }
 });
 
-app.post('/import-product', async (req, res) => {
-  const { productId, quantity } = req.body;
-  try {
-    await sql.connect(config);
-
-    const request = new sql.Request();
-    request.input('productId', sql.VarChar, productId);
-    request.input('quantity', sql.Int, quantity);
-
-    await request.query(`
-      UPDATE PRODUCT
-      SET IN_STOCK = IN_STOCK + @quantity
-      WHERE PRODUCT_ID = @productId
-    `);
-
-    res.json({ success: true, message: 'Nhập hàng thành công' });
-  } catch (error) {
-    console.error('Error updating stock:', error);
-    res.status(500).json({ success: false, message: 'Nhập hàng thất bại' });
-  }
-});
-
 app.post('/order/checkout', async (req, res) => {
   const { customer_id, order_id, order_date, total, order_status, items, invoice } = req.body;
-  console.log(customer_id, order_id, order_date, total, order_status, items, invoice);
   if (!customer_id || !items || !Array.isArray(items) || !order_id || !invoice) {
     return res.status(400).json({ success: false, message: 'Thiếu dữ liệu!' });
   }
@@ -544,6 +521,79 @@ app.get('/orders/:orderId/items', async (req, res) => {
   } catch (err) {
     console.error('Lỗi lấy order items:', err.message);
     res.status(500).json({ success: false, message: 'Lỗi server' });
+  }
+});
+
+app.post('/import-product', async (req, res) => {
+  const { productId, quantity } = req.body;
+  try {
+    await sql.connect(config);
+
+    const request = new sql.Request();
+    request.input('productId', sql.VarChar, productId);
+    request.input('quantity', sql.Int, quantity);
+
+    await request.query(`
+      UPDATE PRODUCT
+      SET IN_STOCK = IN_STOCK + @quantity
+      WHERE PRODUCT_ID = @productId
+    `);
+
+    res.json({ success: true, message: 'Nhập hàng thành công' });
+  } catch (error) {
+    console.error('Error updating stock:', error);
+    res.status(500).json({ success: false, message: 'Nhập hàng thất bại' });
+  }
+});
+
+app.put('/update-product', async (req, res) => {
+  const { productId, name, price, stock } = req.body;
+
+  console.log(typeof(price)); // Kiểm tra kiểu dữ liệu của price
+
+  // Đảm bảo price là số hợp lệ
+  const validPrice = parseFloat(price);
+  if (isNaN(validPrice)) {
+    return res.status(400).json({ success: false, message: 'Giá sản phẩm không hợp lệ' });
+  }
+
+  // Chuyển validPrice thành chuỗi trước khi lưu vào cơ sở dữ liệu
+  const priceAsString = validPrice.toString();
+
+  try {
+    const pool = await sql.connect(config);
+    await pool.request()
+      .input('productId', sql.VarChar, productId)
+      .input('name', sql.NVarChar, name)
+      .input('price', sql.NVarChar, priceAsString) // Truyền price dưới dạng chuỗi vào cơ sở dữ liệu
+      .input('stock', sql.Int, stock)
+      .query('UPDATE PRODUCT SET PRODUCT_NAME = @name, PRICE = @price, IN_STOCK = @stock WHERE PRODUCT_ID = @productId');
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error updating product:', error);
+    res.status(500).json({ success: false, message: 'Error updating product' });
+  }
+});
+
+// API DELETE để xóa sản phẩm
+app.delete('/delete-product/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const pool = await sql.connect(config);
+    const result = await pool.request()
+      .input('productId', sql.NVarChar, id)
+      .query('DELETE FROM PRODUCT WHERE PRODUCT_ID = @productId');
+
+    if (result.rowsAffected[0] === 0) {
+      return res.status(404).json({ success: false, message: 'Không tìm thấy sản phẩm để xóa' });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ success: false, message: 'Lỗi khi xóa sản phẩm' });
   }
 });
 
